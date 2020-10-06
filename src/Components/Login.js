@@ -1,9 +1,10 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useHistory } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import data from "./data/login.json";
 import Demo from "./Demo";
 import { render } from "react-dom";
+import { Redirect } from "react-router";
 // const email="";
 // const password="";
 
@@ -12,7 +13,8 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      loginvalidate: false
     };
     this.setEmail = this.setEmail.bind(this);
     this.setPassword = this.setPassword.bind(this);
@@ -30,14 +32,27 @@ class Login extends Component {
   setPassword(event) {
     this.setState({ password: event.target.value });
   }
-  handleSubmit() {
+  handleSubmit(event) {
     //console.log('Your input value is: ' + this.state.email)
     //console.log('Your input value is: ' + this.state.password)
     const newdata = data.map((data) => {
-      return (
-        //console.log(data.username)
-        <Demo />
-      );
+      if (
+        this.state.email === data.email &&
+        this.state.password === data.password
+      ) {
+        //this.setState({ loginvalidate: true });
+        //console.log(this.state.loginvalidate);
+        this.renderRedirect();
+        // const history = useHistory();
+        // const navigateTo = () => history.push('/Demo');
+        console.log("Login sucess");
+      }
+
+      // console.log(data.email)
+      // return (
+
+      //   <Demo />
+      // );
       //   else
       //   {
       //     console.log("login failed");
@@ -45,6 +60,14 @@ class Login extends Component {
     });
     //event.preventDefault();
   }
+  renderRedirect = () => {
+    // console.log(this.state.loginvalidate);
+    // if (this.state.loginvalidate) {
+    console.log("Demo page");
+    this.props.history.push("/");
+    return <Redirect to="./Components/Demo" />;
+    // }
+  };
 
   render() {
     return (

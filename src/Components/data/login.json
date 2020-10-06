@@ -3,18 +3,21 @@
     "id": 1,
     "name": "Abc",
     "email": "abc@gmai.com",
-    "password": "test"
+    "password": "test",
+    "Role": "Manager"
   },
   {
     "id": 2,
     "name": "xyz",
     "email": "xyz@gmai.com",
-    "password": "test"
+    "password": "test",
+    "Role": "Owner"
   },
   {
     "id": 3,
     "name": "PQR",
     "email": "PQR@gmai.com",
-    "password": "test"
+    "password": "test",
+    "Role": "Receptionist"
   }
 ]
