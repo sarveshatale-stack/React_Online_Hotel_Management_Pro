@@ -64,8 +64,10 @@ class Login extends Component {
     // console.log(this.state.loginvalidate);
     // if (this.state.loginvalidate) {
     console.log("Demo page");
+    //this.props.history.push('/posts/');
+    this.props.history.push("./Components/Demo/");
     this.props.history.push("/");
-    return <Redirect to="./Components/Demo" />;
+    //return <Redirect to="/Demo" />;
     // }
   };
 
