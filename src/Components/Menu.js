@@ -4,11 +4,37 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import About from "./About";
 import Contact from "./Contact";
 import Home from "./Home";
+import { Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
+import Login from "./Login";
 class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.loginfunction = this.loginfunction.bind(this);
+  }
+  // loginfunction() {
+  //   console.log("role");
+  //   //this.setState({ redirect: true })
+  //   this.renderRedirect();
+  // }
+  loginfunction = () => {
+    console.log("role");
+    //this.setState({ redirect: true })
+    this.renderRedirect();
+  };
+  renderRedirect = () => {
+    console.log("role1");
+    // window.location.hash = "#/my/target/url";
+    // const history = useHistory();
+    //this.props.history.push('/posts/');
+    //if (this.state.redirect) {
+    // return <Redirect from='/Menu/' to="/Login/" />
+    //}
+  };
   render() {
     return (
       <div>
-        <div className="divformaincontent">
+        <div>
           <Router>
             <div>
               <h2>Welcome To Taj Hotel</h2>
@@ -30,6 +56,11 @@ class Menu extends Component {
                       Contact
                     </Link>
                   </li>
+                  <li>
+                    <Link to={"/Login"} className="nav-link">
+                      Login
+                    </Link>
+                  </li>
                 </ul>
               </nav>
               <hr />
@@ -37,38 +68,41 @@ class Menu extends Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/contact" component={Contact} />
+                <Route path="/Login" component={Login} />
               </Switch>
             </div>
             <div></div>
+            {this.renderRedirect()}
           </Router>
         </div>
-        <div>
+        {/* <div>
           <table>
             <tr>
               <td>
                 <button className="btnforrole">
-                  <img src="./img/google.png" onClick={this.myfunction} />
+                  <img src="./img/google.png" onClick={this.loginfunction} />
                   Owner
                 </button>
                 <image src="/abc.jpg" />
               </td>
               <td>
                 <button className="btnforrole">
-                  <img src="./img/google.png" onClick={this.myfunction} />
+                  <img src="./img/google.png" onClick={this.loginfunction} />
                   Manager
                 </button>
                 <image src="/abc.jpg" />
               </td>
               <td>
                 <button className="btnforrole">
-                  <img src="./img/google.png" onClick={this.myfunction} />
+                  <img src="./img/google.png" onClick={this.loginfunction} />
                   Receptionist
                 </button>
                 <image src="/abc.jpg" />
               </td>
             </tr>
           </table>
-        </div>
+        
+        </div> */}
       </div>
     );
   }
