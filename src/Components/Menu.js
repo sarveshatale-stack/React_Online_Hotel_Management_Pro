@@ -7,6 +7,8 @@ import Home from "./Home";
 import { Redirect } from "react-router";
 import { useHistory } from "react-router-dom";
 import Login from "./Login";
+import Demo from "./Demo";
+import Owner from "./Owner";
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -69,6 +71,7 @@ class Menu extends Component {
                 <Route path="/about" component={About} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/Login" component={Login} />
+                <Route path="/Owner" component={Owner} />
               </Switch>
             </div>
             <div></div>

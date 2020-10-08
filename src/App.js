@@ -6,9 +6,9 @@ import Owner from "./Components/Owner";
 export default function App() {
   return (
     <div className="App">
-      <Owner />
+      {/* <Owner /> */}
       {/* <LoginLayout/> */}
-      {/* <Menu /> */}
+      <Menu />
       {/* <Login /> */}
     </div>
   );

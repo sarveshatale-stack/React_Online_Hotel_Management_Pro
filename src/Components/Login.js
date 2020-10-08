@@ -3,6 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import data from "./data/login.json";
 import Demo from "./Demo";
+import Owner from "./Owner";
 import { render } from "react-dom";
 import { Redirect } from "react-router";
 // const email="";
@@ -65,8 +66,8 @@ class Login extends Component {
     // if (this.state.loginvalidate) {
     console.log("Demo page");
     //this.props.history.push('/posts/');
-    this.props.history.push("./Components/Demo/");
-    this.props.history.push("/");
+    this.props.history.push("/Owner/");
+    // this.props.history.push("/");
     //return <Redirect to="/Demo" />;
     // }
   };
