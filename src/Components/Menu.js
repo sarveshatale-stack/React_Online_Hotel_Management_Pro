@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import About from "./About";
 import Contact from "./Contact";
 import Home from "./Home";
-import { Redirect } from "react-router";
-import { useHistory } from "react-router-dom";
 import Login from "./Login";
 import Demo from "./Demo";
 import Owner from "./Owner";

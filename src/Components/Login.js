@@ -1,14 +1,6 @@
-import React, { Component, useState, useHistory } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import React, { Component } from "react";
 import "./Login.css";
 import data from "./data/login.json";
-import Demo from "./Demo";
-import Owner from "./Owner";
-import { render } from "react-dom";
-import { Redirect } from "react-router";
-// const email="";
-// const password="";
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -48,28 +40,13 @@ class Login extends Component {
         // const navigateTo = () => history.push('/Demo');
         console.log("Login sucess");
       }
-
-      // console.log(data.email)
-      // return (
-
-      //   <Demo />
-      // );
-      //   else
-      //   {
-      //     console.log("login failed");
-      //   }
     });
     //event.preventDefault();
   }
   renderRedirect = () => {
-    // console.log(this.state.loginvalidate);
-    // if (this.state.loginvalidate) {
     console.log("Demo page");
     //this.props.history.push('/posts/');
-    this.props.history.push("/Owner/");
-    // this.props.history.push("/");
-    //return <Redirect to="/Demo" />;
-    // }
+    this.props.history.push("/Owner");
   };
 
   render() {
