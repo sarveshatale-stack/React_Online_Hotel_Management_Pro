@@ -5,7 +5,6 @@ import About from "./About";
 import Contact from "./Contact";
 import Home from "./Home";
 import Login from "./Login";
-import Demo from "./Demo";
 import Owner from "./Owner";
 class Menu extends Component {
   constructor(props) {
@@ -39,7 +38,7 @@ class Menu extends Component {
             <div>
               <h2>Welcome To Taj Hotel</h2>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <ul className="navbar-nav mr-auto">
+                <ul className="navbar mr-auto">
                   <li>
                     <Link to={"/"} className="nav-link">
                       {" "}
