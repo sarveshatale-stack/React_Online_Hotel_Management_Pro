@@ -6,7 +6,7 @@ class Table extends Component {
     super(props);
   }
 
-  DeleteStudent = () => {
+  DeleteRoom = () => {
     axios.delete("?id=" + this.props.obj.Id).then((json) => {
       if (json.data.Status === "Delete") {
         alert("Record deleted successfully!!");
@@ -16,10 +16,11 @@ class Table extends Component {
   render() {
     return (
       <tr>
-        <td>{this.props.obj.DepName}</td>
-        <td>{this.props.obj.DepHead}</td>
-        <td>{this.props.obj.DepPhone}</td>
-        <td>{this.props.obj.DepEmail}</td>
+        <td>{this.props.obj.RoomNumber}</td>
+        <td>{this.props.obj.RoomType}</td>
+        <td>{this.props.obj.RoomPhone}</td>
+        <td>{this.props.obj.RoomLocation}</td>
+        <td>{this.props.obj.RoomStatus}</td>
         <td>
           <Link to={"/edit/" + this.props.obj.Id} className="btn btn-success">
             Edit
@@ -28,7 +29,7 @@ class Table extends Component {
         <td>
           <button
             type="button"
-            onClick={this.DeleteStudent}
+            onClick={this.DeleteRoom}
             className="btn btn-danger"
           >
             Delete

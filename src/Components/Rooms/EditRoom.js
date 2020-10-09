@@ -22,10 +22,11 @@ class Edit extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      DepName: "",
-      DepHead: "",
-      DepPhone: "",
-      DepEmail: ""
+      RoomNumber: "",
+      RoomType: "",
+      RoomPhone: "",
+      RoomLocation: "",
+      RoomStatus: ""
     };
   }
 
@@ -34,10 +35,11 @@ class Edit extends React.Component {
       .get("?id=" + this.props.match.params.id)
       .then((response) => {
         this.setState({
-          DepName: response.data.DepName,
-          DepHead: response.data.DepHead,
-          DepPhone: response.data.DepPhone,
-          DepEmail: response.data.DepEmail
+          RoomNumber: response.data.RoomNumber,
+          RoomType: response.data.RoomType,
+          RoomPhone: response.data.RoomPhone,
+          RoomLocation: response.data.RoomLocation,
+          RoomStatus: response.data.RoomStatus
         });
       })
       .catch(function (error) {
@@ -47,99 +49,122 @@ class Edit extends React.Component {
 
   onChangeName(e) {
     this.setState({
-      DepName: e.target.value
+      RoomNumber: e.target.value
     });
   }
   onChangeRollNo(e) {
     this.setState({
-      DepHead: e.target.value
+      RoomType: e.target.value
     });
   }
   onChangeClass(e) {
     this.setState({
-      DepPhone: e.target.value
+      RoomPhone: e.target.value
     });
   }
   onChangeAddress(e) {
     this.setState({
-      DepEmail: e.target.value
+      RoomLocation: e.target.value
     });
   }
-
+  onChangeStatus(e) {
+    this.setState({
+      RoomStatus: e.target.value
+    });
+  }
   onSubmit(e) {
     debugger;
     e.preventDefault();
     const obj = {
       Id: this.props.match.params.id,
-      DepName: this.state.DepName,
-      DepHead: this.state.DepHead,
-      DepPhone: this.state.DepPhone,
-      DepEmail: this.state.DepEmail
+      RoomNumber: this.state.RoomNumber,
+      RoomType: this.state.RoomType,
+      RoomPhone: this.state.RoomPhone,
+      RoomLocation: this.state.RoomLocation,
+      RoomStatus: this.state.RoomStatus
     };
     axios.post("", obj).then((res) => console.log(res.data));
     debugger;
-    this.props.history.push("/Departmentlist");
+    this.props.history.push("/RoomList");
   }
   render() {
     return (
       <Container className="App">
-        <h4 className="PageHeading">Update Student Informations</h4>
+        <h4 className="PageHeading">Update Room Informations</h4>
         <Form className="form" onSubmit={this.onSubmit}>
           <Col>
             <FormGroup row>
-              <Label for="name" sm={2}>
-                Department Name
+              <Label for="number" sm={2}>
+                Room Number
               </Label>
               <Col sm={10}>
                 <Input
                   type="text"
                   name="DepName"
-                  value={this.state.DepName}
+                  value={this.state.RoomNumber}
                   onChange={this.onChangeName}
-                  placeholder="Enter Name"
+                  placeholder="Enter Room Number"
                 />
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="Password" sm={2}>
-                Department Head
+              <Label for="type" sm={2}>
+                Room Type
               </Label>
               <Col sm={10}>
-                <Input
-                  type="text"
-                  name="DepHead"
-                  value={this.state.DepHead}
+                <select
+                  name="RoomType"
+                  value={this.state.RoomType}
                   onChange={this.onChangeRollNo}
-                  placeholder="Enter RollNo"
-                />
+                >
+                  <option>Normal</option>
+                  <option>Ac</option>
+                  <option>Delux</option>
+                  <option>Super Delux</option>
+                </select>
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="Password" sm={2}>
-                Department Phone
+              <Label for="phone" sm={2}>
+                Room Phone
               </Label>
               <Col sm={10}>
                 <Input
                   type="text"
-                  name="DepPhone"
-                  value={this.state.DepPhone}
+                  name="RoomPhone"
+                  value={this.state.RoomPhone}
                   onChange={this.onChangeClass}
-                  placeholder="Enter Class"
+                  placeholder="Enter Phone"
                 />
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="Password" sm={2}>
-                Department EmailId
+              <Label for="location" sm={2}>
+                Room Location
               </Label>
               <Col sm={10}>
                 <Input
                   type="text"
-                  name="DepEmail"
-                  value={this.state.DepEmail}
+                  name="Roomlocation"
+                  value={this.state.RoomLocation}
                   onChange={this.onChangeAddress}
-                  placeholder="Enter Address"
+                  placeholder="Enter Location"
                 />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="location" sm={2}>
+                Room Status
+              </Label>
+              <Col sm={10}>
+                <select
+                  name="RoomStatus"
+                  onChange={this.onChangeStatus}
+                  value={this.state.RoomStatus}
+                >
+                  <option>Reserved</option>
+                  <option>UnReserved</option>
+                </select>
               </Col>
             </FormGroup>
           </Col>

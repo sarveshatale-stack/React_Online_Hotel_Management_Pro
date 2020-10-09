@@ -11,23 +11,25 @@ import {
   Input,
   Button
 } from "reactstrap";
-class AddDepartment extends React.Component {
+class AddRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      DepName: "",
-      DepHead: "",
-      DepPhone: "",
-      DepEmail: ""
+      RoomNumber: "",
+      RoomType: "",
+      RoomPhone: "",
+      RoomLocation: "",
+      RoomStatus: ""
     };
   }
-  Addstudent = () => {
+  AddRoom = () => {
     axios
       .post("", {
-        DepName: this.state.DepName,
-        DepHead: this.state.DepHead,
-        DepPhone: this.state.DepPhone,
-        DepEmail: this.state.DepEmail
+        RoomNumber: this.state.RoomNumber,
+        RoomType: this.state.RoomType,
+        RoomPhone: this.state.RoomPhone,
+        RoomLocation: this.state.RoomLocation,
+        RoomStatus: this.state.RoomStatus
       })
       .then((json) => {
         if (json.data.Status === "Success") {
@@ -37,7 +39,7 @@ class AddDepartment extends React.Component {
         } else {
           alert("Data not Saved");
           debugger;
-          this.props.history.push("/Studentlist");
+          this.props.history.push("/RoomList");
         }
       });
   };
@@ -53,59 +55,77 @@ class AddDepartment extends React.Component {
         <Form className="form">
           <Col>
             <FormGroup row>
-              <Label for="name" sm={2}>
-                Department Name
+              <Label for="Number" sm={2}>
+                Room Number
               </Label>
               <Col sm={5}>
                 <Input
                   type="text"
-                  name="DepName"
+                  name="RoomNumber"
                   onChange={this.handleChange}
-                  value={this.state.DepName}
-                  placeholder="Enter Department Name"
+                  value={this.state.RoomNumber}
+                  placeholder="Enter Room Number"
                 />
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="address" sm={2}>
-                Department Head
+              <Label for="Type" sm={2}>
+                Room Type
+              </Label>
+              <Col sm={5}>
+                <select
+                  name="RoomType"
+                  onChange={this.handleChange}
+                  value={this.state.RoomType}
+                >
+                  <option>Normal</option>
+                  <option>Ac</option>
+                  <option>Delux</option>
+                  <option>Super Delux</option>
+                </select>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="Phone" sm={2}>
+                Room Phone
               </Label>
               <Col sm={5}>
                 <Input
                   type="text"
-                  name="DepHead"
+                  name="RoomPhone"
                   onChange={this.handleChange}
-                  value={this.state.DepHead}
-                  placeholder="Department Head"
+                  value={this.state.RoomPhone}
+                  placeholder="Room Phone"
                 />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="Password" sm={2}>
-                Department Phone
-              </Label>
-              <Col sm={5}>
-                <Input
-                  type="text"
-                  name="DepPhone"
-                  onChange={this.handleChange}
-                  value={this.state.DepPhone}
-                  placeholder="Department Phone"
-                />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="Password" sm={2}>
-                Department EmailID
+                Room Location
               </Label>
               <Col sm={5}>
                 <Input
                   type="text"
                   name="DepEmail"
                   onChange={this.handleChange}
-                  value={this.state.DepEmail}
-                  placeholder="Department EmailID"
+                  value={this.state.RoomLocation}
+                  placeholder="Room Location(Like: Wing/Floor)"
                 />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="status" sm={2}>
+                Room Status
+              </Label>
+              <Col sm={5}>
+                <select
+                  name="RoomStatus"
+                  onChange={this.handleChange}
+                  value={this.state.RoomStatus}
+                >
+                  <option>Reserved</option>
+                  <option>UnReserved</option>
+                </select>
               </Col>
             </FormGroup>
           </Col>
@@ -115,7 +135,7 @@ class AddDepartment extends React.Component {
               <Col sm={1}>
                 <button
                   type="button"
-                  onClick={this.Addstudent}
+                  onClick={this.AddRoom}
                   className="btn btn-success"
                 >
                   Submit
@@ -133,4 +153,4 @@ class AddDepartment extends React.Component {
   }
 }
 
-export default AddDepartment;
+export default AddRoom;
