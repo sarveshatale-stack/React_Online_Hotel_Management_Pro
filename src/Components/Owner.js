@@ -18,7 +18,7 @@ class Owner extends Component {
                 Add Department
               </Link>
               <Link to={"/DepartmentList"} className="nav-link">
-                View Report
+                Department List
               </Link>
               <Link to={"/ViewReport"} className="nav-link">
                 View Report
