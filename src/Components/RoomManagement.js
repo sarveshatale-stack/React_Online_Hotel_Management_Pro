@@ -3,10 +3,10 @@ import "./css/Menu.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./css/Owner.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AddRoom from "./Room/AddRoom";
-import RoomList from "./Room/RoomList";
+import AddRoom from "./Rooms/AddRoom";
+import RoomList from "./Rooms/RoomList";
 import "./css/AddDepartment.css";
-class Owner extends Component {
+class RoomManagement extends Component {
   render() {
     return (
       <div>
@@ -31,4 +31,4 @@ class Owner extends Component {
   }
 }
 
-export default Owner;
+export default RoomManagement;

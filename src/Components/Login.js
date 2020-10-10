@@ -33,12 +33,14 @@ class Login extends Component {
         this.state.email === data.email &&
         this.state.password === data.password
       ) {
-        //this.setState({ loginvalidate: true });
-        //console.log(this.state.loginvalidate);
-        this.renderRedirect();
-        // const history = useHistory();
-        // const navigateTo = () => history.push('/Demo');
-        console.log("Login sucess");
+        console.log(this.state.Role);
+        if (data.Role === "Owner") {
+          this.props.history.push("/Owner");
+        } else if (data.Role === "Manager") {
+          this.props.history.push("/RoomManagement");
+        } else {
+          this.props.history.push("/Owner");
+        }
       }
     });
     //event.preventDefault();

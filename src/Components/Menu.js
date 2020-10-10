@@ -6,6 +6,7 @@ import Contact from "./Contact";
 import Home from "./Home";
 import Login from "./Login";
 import Owner from "./Owner";
+import RoomManagement from "./RoomManagement";
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -69,6 +70,7 @@ class Menu extends Component {
                 <Route path="/contact" component={Contact} />
                 <Route path="/Login" component={Login} />
                 <Route path="/Owner" component={Owner} />
+                <Route path="/RoomManagement" component={RoomManagement} />
               </Switch>
             </div>
             <div></div>
