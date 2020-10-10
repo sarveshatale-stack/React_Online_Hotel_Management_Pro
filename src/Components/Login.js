@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Login.css";
 import data from "./data/login.json";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+const Save_User_Sign_From = "REACT.UserSignUp";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -26,14 +28,28 @@ class Login extends Component {
     this.setState({ password: event.target.value });
   }
   handleSubmit(event) {
-    //console.log('Your input value is: ' + this.state.email)
-    //console.log('Your input value is: ' + this.state.password)
+    //SignUp Login
+    // const usersign = JSON.parse(localStorage.getItem(Save_User_Sign_From));
+    // for (var i = 0; i < usersign.length; i++) {
+    //   console.log(usersign);
+    //   if (
+    //     this.state.email === usersign[i].UserEmailId &&
+    //     this.state.password === usersign[i].Password
+    //   ) {
+    //     if (usersign[i].UserRole === "Owner") {
+    //       this.props.history.push("/Owner");
+    //     } else if (usersign[i].UserRole === "Manager") {
+    //       this.props.history.push("/RoomManagement");
+    //     } else {
+    //       this.props.history.push("/Owner");
+    //     }
+    //   }
+    // }
     const newdata = data.map((data) => {
       if (
         this.state.email === data.email &&
         this.state.password === data.password
       ) {
-        console.log(this.state.Role);
         if (data.Role === "Owner") {
           this.props.history.push("/Owner");
         } else if (data.Role === "Manager") {
@@ -43,7 +59,7 @@ class Login extends Component {
         }
       }
     });
-    //event.preventDefault();
+    event.preventDefault();
   }
   renderRedirect = () => {
     console.log("Demo page");
@@ -95,6 +111,11 @@ class Login extends Component {
           >
             Login
           </button>
+          <div>
+            <Link to={"/UserSignUp"} className="nav-link">
+              Sign Up
+            </Link>
+          </div>
         </form>
       </div>
     );

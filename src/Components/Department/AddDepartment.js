@@ -62,12 +62,9 @@ function AddDepartment(props) {
 
   //Added function to get max id
   const getMax = (arr, prop) => {
-    console.log("button clicked!");
     var max;
-    console.log("Array" + arr);
     for (var i = 0; i < arr.length; i++) {
       if (max == null || arr[i][prop] > max[prop]) max = arr[i];
-      console.log(max);
     }
     return max;
   };

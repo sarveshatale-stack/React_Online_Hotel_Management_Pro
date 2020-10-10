@@ -73,7 +73,6 @@ class Edit extends React.Component {
     });
   }
   onSubmit(e) {
-    debugger;
     e.preventDefault();
     const obj = {
       Id: this.props.match.params.id,
