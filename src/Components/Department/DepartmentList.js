@@ -1,48 +1,66 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Table from "./Table";
+const Save_Department_From = "REACT.AddDepartment";
+function DepartmentList(props) {
+  const [Department, getDepartment] = useState([]);
 
-export default class DepartmentList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { business: [] };
-  }
-  componentDidMount() {
-    debugger;
-    axios
-      .get("")
-      .then((response) => {
-        this.setState({ business: response.data });
-        debugger;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+  useEffect(() => {
+    PopulateEmployee();
+  }, [props.value]);
 
-  tabRow() {
-    return this.state.business.map(function (object, i) {
-      return <Table obj={object} key={i} />;
-    });
-  }
+  const PopulateEmployee = () => {
+    const saveEmp = JSON.parse(localStorage.getItem(Save_Department_From));
+    if (saveEmp) {
+      getDepartment(saveEmp);
+    }
+  };
 
-  render() {
-    return (
-      <div>
-        <h4 align="center">Department List</h4>
-        <table className="table table-striped" style={{ marginTop: 10 }}>
-          <thead>
-            <tr>
-              <th>Department Name</th>
-              <th>Department Head</th>
-              <th>Department Phone</th>
-              <th>Department EmailID</th>
-              <th colSpan="4">Action</th>
-            </tr>
-          </thead>
-          <tbody>{this.tabRow()}</tbody>
-        </table>
-      </div>
-    );
-  }
+  const handledeleteEmployee = (id) => {
+    if (window.confirm("Are you sure? Click OK to delete this record.")) {
+      var newDepartmentList = Department.filter((emp) => emp.id != id);
+      getDepartment(newDepartmentList);
+      localStorage.setItem(
+        Save_Department_From,
+        JSON.stringify(newDepartmentList)
+      );
+    }
+  };
+
+  return (
+    <div>
+      <h4 align="center">Department List</h4>
+      <table className="table table-striped" style={{ marginTop: 10 }}>
+        <thead>
+          <tr>
+            <th>Department Name</th>
+            <th>Department Head</th>
+            <th>Department Phone</th>
+            <th>Department EmailID</th>
+            <th colSpan="4">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Department.map((item, index) => {
+            return (
+              <tr key={item.id}>
+                <td>{item.DepName}</td>
+                <td>{item.DepHead}</td>
+                <td>{item.DepPhone}</td>
+                <td>{item.DepEmail}</td>
+                <td>
+                  <input
+                    className="btn btn-danger"
+                    type="button"
+                    value="x"
+                    onClick={() => handledeleteEmployee(item.id)}
+                  ></input>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 }
+export default DepartmentList;

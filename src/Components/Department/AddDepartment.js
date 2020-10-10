@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
 import {
   Container,
   Col,
@@ -11,46 +9,79 @@ import {
   Input,
   Button
 } from "reactstrap";
-class AddDepartment extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      DepName: "",
-      DepHead: "",
-      DepPhone: "",
-      DepEmail: ""
-    };
-  }
-  Addstudent = () => {
-    axios
-      .post("", {
-        DepName: this.state.DepName,
-        DepHead: this.state.DepHead,
-        DepPhone: this.state.DepPhone,
-        DepEmail: this.state.DepEmail
-      })
-      .then((json) => {
-        if (json.data.Status === "Success") {
-          console.log(json.data.Status);
-          alert("Data Save Successfully");
-          this.props.history.push("/Studentlist");
-        } else {
-          alert("Data not Saved");
-          debugger;
-          this.props.history.push("/Studentlist");
+import Table from "./Table";
+let flag = true;
+const Save_Department_From = "REACT.AddDepartment";
+const initialObj = {
+  DepName: "",
+  DepHead: "",
+  DepEmail: "",
+  DepPhone: "",
+  id: 0
+};
+function AddDepartment(props) {
+  const [Department, setDepatment] = useState(initialObj);
+
+  useEffect(() => {}, [Department]);
+
+  const AddDepatment = (e) => {
+    if (
+      !Department.DepName ||
+      !Department.DepHead ||
+      !Department.DepEmail ||
+      !Department.DepPhone
+    ) {
+      alert("Please enter Department data");
+      return;
+    }
+    if (Department.id === 0) {
+      let dep = { ...Department }; // copying the old datas array
+
+      const saveDep = JSON.parse(localStorage.getItem(Save_Department_From));
+      if (saveDep) {
+        let max;
+        for (var i = 0; i < saveDep.length; i++) {
+          console.log(saveDep);
+          if (saveDep == null || saveDep[i].id > max["id"]) max = saveDep[i];
+          console.log(max);
         }
-      });
+        let newId = max + 1;
+        dep.id = newId;
+        console.log(dep.id);
+        saveDep.push(dep);
+        localStorage.setItem(Save_Department_From, JSON.stringify(saveDep));
+      } else {
+        dep.id = 1;
+        localStorage.setItem(Save_Department_From, JSON.stringify([dep]));
+      }
+      setDepatment(initialObj);
+      flag = !flag;
+    }
   };
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  //Added function to get max id
+  const getMax = (arr, prop) => {
+    console.log("button clicked!");
+    var max;
+    console.log("Array" + arr);
+    for (var i = 0; i < arr.length; i++) {
+      if (max == null || arr[i][prop] > max[prop]) max = arr[i];
+      console.log(max);
+    }
+    return max;
   };
+  const handleChange = (e) => {
+    e.persist();
+    setDepatment({ ...Department, [e.target.id]: e.target.value });
+    //this.setState({ [e.target.name]: e.target.value });
+  };
+  //Added function to get max id
 
-  render() {
-    return (
+  return (
+    <>
       <Container className="AppContainer">
         <h4 className="PageHeading">Enter Department Informations</h4>
-        <Form className="form">
+        <form className="form" onSubmit={AddDepatment}>
           <Col>
             <FormGroup row>
               <Label for="name" sm={2}>
@@ -60,8 +91,9 @@ class AddDepartment extends React.Component {
                 <Input
                   type="text"
                   name="DepName"
-                  onChange={this.handleChange}
-                  value={this.state.DepName}
+                  id="DepName"
+                  onChange={handleChange}
+                  value={Department.DepName}
                   placeholder="Enter Department Name"
                 />
               </Col>
@@ -74,8 +106,9 @@ class AddDepartment extends React.Component {
                 <Input
                   type="text"
                   name="DepHead"
-                  onChange={this.handleChange}
-                  value={this.state.DepHead}
+                  id="DepHead"
+                  onChange={handleChange}
+                  value={Department.DepHead}
                   placeholder="Department Head"
                 />
               </Col>
@@ -88,8 +121,9 @@ class AddDepartment extends React.Component {
                 <Input
                   type="text"
                   name="DepPhone"
-                  onChange={this.handleChange}
-                  value={this.state.DepPhone}
+                  id="DepPhone"
+                  onChange={handleChange}
+                  value={Department.DepPhone}
                   placeholder="Department Phone"
                 />
               </Col>
@@ -102,8 +136,9 @@ class AddDepartment extends React.Component {
                 <Input
                   type="text"
                   name="DepEmail"
-                  onChange={this.handleChange}
-                  value={this.state.DepEmail}
+                  id="DepEmail"
+                  onChange={handleChange}
+                  value={Department.DepEmail}
                   placeholder="Department EmailID"
                 />
               </Col>
@@ -115,7 +150,7 @@ class AddDepartment extends React.Component {
               <Col sm={1}>
                 <button
                   type="button"
-                  onClick={this.Addstudent}
+                  onClick={AddDepatment}
                   className="btn btn-success"
                 >
                   Submit
@@ -127,10 +162,10 @@ class AddDepartment extends React.Component {
               <Col sm={5}></Col>
             </FormGroup>
           </Col>
-        </Form>
+        </form>
       </Container>
-    );
-  }
+    </>
+  );
 }
 
 export default AddDepartment;
