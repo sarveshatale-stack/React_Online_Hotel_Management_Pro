@@ -20,7 +20,7 @@ class Edit extends React.Component {
     this.onChangeRollNo = this.onChangeRollNo.bind(this);
     this.onChangeClass = this.onChangeClass.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
 
     this.state = {
       DepName: "",
@@ -31,10 +31,8 @@ class Edit extends React.Component {
   }
 
   componentDidMount() {
-    console.log("call");
     const saveDep = JSON.parse(localStorage.getItem(Save_Department_From));
     if (saveDep) {
-      console.log(saveDep);
       const query = new URLSearchParams(this.props.location.search);
       console.log(query);
       const id = query.get("Depid");
@@ -96,23 +94,37 @@ class Edit extends React.Component {
     });
   }
 
-  onSubmit(e) {
+  onUpdate(e) {
     e.preventDefault();
-    const obj = {
-      Id: this.props.match.params.id,
-      DepName: this.state.DepName,
-      DepHead: this.state.DepHead,
-      DepPhone: this.state.DepPhone,
-      DepEmail: this.state.DepEmail
-    };
+    const saveDep = JSON.parse(localStorage.getItem(Save_Department_From));
+    if (saveDep) {
+      const query = new URLSearchParams(this.props.location.search);
+      const id = query.get("Depid");
+      const newdata = saveDep.map((data) => {
+        let Compareid = data.id.toString();
+        if (id === Compareid) {
+          (data.DepName = this.state.DepName),
+            (data.DepHead = this.state.DepHead),
+            (data.DepPhone = this.state.DepPhone),
+            (data.DepEmail = this.state.DepEmail);
+        }
+        //saveDep.push(data);
+      });
+      var newDepartmentList = saveDep.filter((emp) => emp.id !== id);
+      localStorage.setItem(
+        Save_Department_From,
+        JSON.stringify(newDepartmentList)
+      );
+    }
 
+    //localStorage.setItem(Save_Department_From, JSON.stringify(saveDep));
     this.props.history.push("/Departmentlist");
   }
   render() {
     return (
-      <Container className="App">
-        <h4 className="PageHeading">Update Student Informations</h4>
-        <Form className="form" onSubmit={this.onSubmit}>
+      <Container className="AppContainer">
+        <h4 className="PageHeading">Update Department Informations</h4>
+        <Form className="form" onSubmit={this.onUpdate}>
           <Col>
             <FormGroup row>
               <Label for="name" sm={2}>

@@ -42,7 +42,6 @@ function AddRoom() {
         let newId = max + 1;
         //let newId = getMax(saveRoom, "id") + 1;
         room.id = newId;
-        console.log(room.id);
         saveRoom.push(room);
         localStorage.setItem(Save_Room_From, JSON.stringify(saveRoom));
       } else {

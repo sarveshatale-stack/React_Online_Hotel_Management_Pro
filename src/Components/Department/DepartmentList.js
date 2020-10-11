@@ -31,8 +31,10 @@ function DepartmentList(props) {
   };
 
   return (
-    <div>
-      <h4 align="center">Department List</h4>
+    <div className="AppContainer">
+      <h4 className="PageHeading" align="center">
+        Department List
+      </h4>
       <table className="table table-striped" style={{ marginTop: 10 }}>
         <thead>
           <tr>
