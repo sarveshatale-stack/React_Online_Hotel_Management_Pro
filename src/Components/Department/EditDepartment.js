@@ -9,8 +9,7 @@ import {
   Input,
   Button
 } from "reactstrap";
-import axios from "axios";
-import "./css/AddDepartment.css";
+//import "./css/AddDepartment.css";
 import { Link } from "react-router-dom";
 const Save_Department_From = "REACT.AddDepartment";
 class Edit extends React.Component {
@@ -32,17 +31,47 @@ class Edit extends React.Component {
   }
 
   componentDidMount() {
+    console.log("call");
     const saveDep = JSON.parse(localStorage.getItem(Save_Department_From));
-    if (saveDep.length >= 1) {
-      var newDepartmentList = saveDep.filter(
-        (Dept) => Dept.id === this.props.match.params.id
-      );
-      this.setState({
-        DepName: newDepartmentList.DepName,
-        DepHead: newDepartmentList.DepHead,
-        DepPhone: newDepartmentList.DepPhone,
-        DepEmail: newDepartmentList.DepEmail
+    if (saveDep) {
+      console.log(saveDep);
+      const query = new URLSearchParams(this.props.location.search);
+      console.log(query);
+      const id = query.get("Depid");
+      console.log(id);
+      const newdata = saveDep.map((data) => {
+        let Compareid = data.id.toString();
+        if (id === Compareid) {
+          this.setState({
+            DepName: data.DepName,
+            DepHead: data.DepHead,
+            DepPhone: data.DepPhone,
+            DepEmail: data.DepEmail
+          });
+        }
       });
+      //let newDepartmentList;
+      //for (let i = 0; i < saveDep.length; i++) {
+      // console.log(saveDep.id[i].id);
+      // if(saveDep.id[i].id)
+      // {
+      //     console.log("insdie call2");
+      //     newDepartmentList=saveDep[i];
+      //     console.log(saveDep[i]);
+      //}
+
+      //}
+      // saveDep.find((element) => {
+      //   return element.title === title;
+      // })
+      // var newDepartmentList = saveDep.find(id);
+      // console.log(newDepartmentList);
+      // this.setState({
+      //   DepName: newDepartmentList.DepName,
+      //   DepHead: newDepartmentList.DepHead,
+      //   DepPhone: newDepartmentList.DepPhone,
+      //   DepEmail: newDepartmentList.DepEmail
+      // });
     }
   }
 
@@ -68,7 +97,6 @@ class Edit extends React.Component {
   }
 
   onSubmit(e) {
-    debugger;
     e.preventDefault();
     const obj = {
       Id: this.props.match.params.id,
@@ -77,8 +105,7 @@ class Edit extends React.Component {
       DepPhone: this.state.DepPhone,
       DepEmail: this.state.DepEmail
     };
-    axios.post("", obj).then((res) => console.log(res.data));
-    debugger;
+
     this.props.history.push("/Departmentlist");
   }
   render() {

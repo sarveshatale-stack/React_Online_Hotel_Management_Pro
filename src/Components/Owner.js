@@ -6,6 +6,7 @@ import DepartmentList from "./Department/DepartmentList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddDepartment from "./Department/AddDepartment";
 import ViewReport from "./ViewReport";
+import Edit from "./Department/EditDepartment";
 import "./css/AddDepartment.css";
 class Owner extends Component {
   render() {
@@ -27,6 +28,7 @@ class Owner extends Component {
             <Switch>
               <Route path="/AddDepartment" component={AddDepartment} />
               <Route path="/DepartmentList" component={DepartmentList} />
+              <Route path="/Edit" component={Edit} />
               <Route path="/ViewReport" component={ViewReport} />
             </Switch>
           </div>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const Save_Department_From = "REACT.AddDepartment";
+
 function DepartmentList(props) {
   const [Department, getDepartment] = useState([]);
 
@@ -17,7 +19,9 @@ function DepartmentList(props) {
 
   const handledeleteEmployee = (id) => {
     if (window.confirm("Are you sure? Click OK to delete this record.")) {
+      console.log(Department);
       var newDepartmentList = Department.filter((emp) => emp.id != id);
+      console.log(newDepartmentList);
       getDepartment(newDepartmentList);
       localStorage.setItem(
         Save_Department_From,
@@ -49,7 +53,7 @@ function DepartmentList(props) {
                 <td>{item.DepEmail}</td>
                 <td>
                   <Link
-                    to={"/Edit/" + this.props.obj.Id}
+                    to={"/Edit?Depid=" + item.id}
                     className="btn btn-success"
                   >
                     Edit
