@@ -9,7 +9,11 @@ import EditRoom from "./Rooms/EditRoom";
 import AddStaffDetails from "./Staff/AddStaffDetails.";
 import StaffList from "./Staff/StaffList";
 import EditStaff from "./Staff/EditStaff";
+import Login from "./Login";
 class RoomManagement extends Component {
+  onLogOut(e) {
+    window.location.href = "/";
+  }
   render() {
     return (
       <div>
@@ -28,6 +32,9 @@ class RoomManagement extends Component {
               <Link to={"/StaffList"} className="nav-link">
                 View Employee
               </Link>
+              <Link to={"/Login"} className="nav-link" onClick={this.onLogOut}>
+                Log Out
+              </Link>
             </div>
             <Switch>
               <Route path="/AddRoom" component={AddRoom} />
@@ -36,6 +43,7 @@ class RoomManagement extends Component {
               <Route path="/AddStaffDetails" component={AddStaffDetails} />
               <Route path="/EditStaff" component={EditStaff} />
               <Route path="/StaffList" component={StaffList} />
+              <Route path="/Login" component={Login} />
             </Switch>
           </div>
         </Router>

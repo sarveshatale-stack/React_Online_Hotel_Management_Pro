@@ -8,7 +8,11 @@ import AddDepartment from "./Department/AddDepartment";
 import ViewReport from "./ViewReport";
 import Edit from "./Department/EditDepartment";
 import "./css/AddDepartment.css";
+import Login from "./Login";
 class Owner extends Component {
+  onLogOut(e) {
+    window.location.href = "/";
+  }
   render() {
     return (
       <div>
@@ -24,12 +28,16 @@ class Owner extends Component {
               <Link to={"/ViewReport"} className="nav-link">
                 View Report
               </Link>
+              <Link to={"/Login"} className="nav-link" onClick={this.onLogOut}>
+                Log Out
+              </Link>
             </div>
             <Switch>
               <Route path="/AddDepartment" component={AddDepartment} />
               <Route path="/DepartmentList" component={DepartmentList} />
               <Route path="/Edit" component={Edit} />
               <Route path="/ViewReport" component={ViewReport} />
+              <Route path="/Login" component={Login} />
             </Switch>
           </div>
         </Router>
