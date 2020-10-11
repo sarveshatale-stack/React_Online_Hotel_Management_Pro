@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RoomTable from "./RoomTable";
+import { Link } from "react-router-dom";
 const Save_Room_From = "REACT.AddRoom";
 function RoomList(props) {
   const [Room, getRoom] = useState([]);
@@ -48,6 +49,12 @@ function RoomList(props) {
                 <td>{item.RoomLocation}</td>
                 <td>{item.RoomStatus}</td>
                 <td>
+                  <Link
+                    to={"/Edit?Roomid=" + item.id}
+                    className="btn btn-success"
+                  >
+                    Edit
+                  </Link>
                   <input
                     className="btn btn-danger"
                     type="button"

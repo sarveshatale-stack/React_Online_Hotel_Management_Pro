@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import axios from "axios";
 import "./css/AddDepartment.css";
+const Save_Room_From = "REACT.AddRoom";
 class Edit extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,8 @@ class Edit extends React.Component {
     this.onChangeRollNo = this.onChangeRollNo.bind(this);
     this.onChangeClass = this.onChangeClass.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeStatus = this.onChangeStatus.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
 
     this.state = {
       RoomNumber: "",
@@ -31,20 +33,23 @@ class Edit extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .get("?id=" + this.props.match.params.id)
-      .then((response) => {
-        this.setState({
-          RoomNumber: response.data.RoomNumber,
-          RoomType: response.data.RoomType,
-          RoomPhone: response.data.RoomPhone,
-          RoomLocation: response.data.RoomLocation,
-          RoomStatus: response.data.RoomStatus
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+    const saveDep = JSON.parse(localStorage.getItem(Save_Room_From));
+    if (saveDep) {
+      const query = new URLSearchParams(this.props.location.search);
+      const id = query.get("Roomid");
+      const newdata = saveDep.map((data) => {
+        let Compareid = data.id.toString();
+        if (id === Compareid) {
+          this.setState({
+            RoomNumber: data.RoomNumber,
+            RoomType: data.RoomType,
+            RoomPhone: data.RoomPhone,
+            RoomLocation: data.RoomLocation,
+            RoomStatus: data.RoomStatus
+          });
+        }
       });
+    }
   }
 
   onChangeName(e) {
@@ -72,25 +77,36 @@ class Edit extends React.Component {
       RoomStatus: e.target.value
     });
   }
-  onSubmit(e) {
+
+  onUpdate(e) {
     e.preventDefault();
-    const obj = {
-      Id: this.props.match.params.id,
-      RoomNumber: this.state.RoomNumber,
-      RoomType: this.state.RoomType,
-      RoomPhone: this.state.RoomPhone,
-      RoomLocation: this.state.RoomLocation,
-      RoomStatus: this.state.RoomStatus
-    };
-    axios.post("", obj).then((res) => console.log(res.data));
-    debugger;
+    const saveDep = JSON.parse(localStorage.getItem(Save_Department_From));
+    if (saveDep) {
+      const query = new URLSearchParams(this.props.location.search);
+      const id = query.get("Roomid");
+      const newdata = saveDep.map((data) => {
+        let Compareid = data.id.toString();
+        if (id === Compareid) {
+          (data.RoomNumber = this.state.RoomNumber),
+            (data.RoomType = this.state.RoomType),
+            (data.RoomPhone = this.state.RoomPhone),
+            (data.RoomLocation = this.state.RoomLocation);
+          data.RoomStatus = this.state.RoomStatus;
+        }
+      });
+      var newDepartmentList = saveDep.filter((emp) => emp.id !== id);
+      localStorage.setItem(Save_Room_From, JSON.stringify(newDepartmentList));
+    }
+
+    //localStorage.setItem(Save_Department_From, JSON.stringify(saveDep));
     this.props.history.push("/RoomList");
   }
+
   render() {
     return (
       <Container className="App">
         <h4 className="PageHeading">Update Room Informations</h4>
-        <Form className="form" onSubmit={this.onSubmit}>
+        <Form className="form" onSubmit={this.onUpdate}>
           <Col>
             <FormGroup row>
               <Label for="number" sm={2}>
