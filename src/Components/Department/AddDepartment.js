@@ -9,7 +9,6 @@ import {
   Input,
   Button
 } from "reactstrap";
-import Table from "./Table";
 let flag = true;
 const Save_Department_From = "REACT.AddDepartment";
 const initialObj = {

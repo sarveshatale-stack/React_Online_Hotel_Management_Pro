@@ -34,9 +34,7 @@ class Edit extends React.Component {
     const saveDep = JSON.parse(localStorage.getItem(Save_Department_From));
     if (saveDep) {
       const query = new URLSearchParams(this.props.location.search);
-      console.log(query);
       const id = query.get("Depid");
-      console.log(id);
       const newdata = saveDep.map((data) => {
         let Compareid = data.id.toString();
         if (id === Compareid) {

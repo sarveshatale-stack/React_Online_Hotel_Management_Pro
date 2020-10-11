@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import RoomTable from "./RoomTable";
 import { Link } from "react-router-dom";
 const Save_Room_From = "REACT.AddRoom";
 function RoomList(props) {
