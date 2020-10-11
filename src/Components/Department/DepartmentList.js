@@ -48,6 +48,12 @@ function DepartmentList(props) {
                 <td>{item.DepPhone}</td>
                 <td>{item.DepEmail}</td>
                 <td>
+                  <Link
+                    to={"/Edit/" + this.props.obj.Id}
+                    className="btn btn-success"
+                  >
+                    Edit
+                  </Link>
                   <input
                     className="btn btn-danger"
                     type="button"

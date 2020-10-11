@@ -11,6 +11,8 @@ import {
 } from "reactstrap";
 import axios from "axios";
 import "./css/AddDepartment.css";
+import { Link } from "react-router-dom";
+const Save_Department_From = "REACT.AddDepartment";
 class Edit extends React.Component {
   constructor(props) {
     super(props);
@@ -30,19 +32,18 @@ class Edit extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .get("?id=" + this.props.match.params.id)
-      .then((response) => {
-        this.setState({
-          DepName: response.data.DepName,
-          DepHead: response.data.DepHead,
-          DepPhone: response.data.DepPhone,
-          DepEmail: response.data.DepEmail
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+    const saveDep = JSON.parse(localStorage.getItem(Save_Department_From));
+    if (saveDep.length >= 1) {
+      var newDepartmentList = saveDep.filter(
+        (Dept) => Dept.id === this.props.match.params.id
+      );
+      this.setState({
+        DepName: newDepartmentList.DepName,
+        DepHead: newDepartmentList.DepHead,
+        DepPhone: newDepartmentList.DepPhone,
+        DepEmail: newDepartmentList.DepEmail
       });
+    }
   }
 
   onChangeName(e) {
@@ -94,51 +95,55 @@ class Edit extends React.Component {
                 <Input
                   type="text"
                   name="DepName"
+                  id="DepName"
                   value={this.state.DepName}
                   onChange={this.onChangeName}
-                  placeholder="Enter Name"
+                  placeholder="Enter Dept Name"
                 />
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="Password" sm={2}>
+              <Label for="head" sm={2}>
                 Department Head
               </Label>
               <Col sm={10}>
                 <Input
                   type="text"
                   name="DepHead"
+                  id="DepHead"
                   value={this.state.DepHead}
                   onChange={this.onChangeRollNo}
-                  placeholder="Enter RollNo"
+                  placeholder="Enter Dept Head"
                 />
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="Password" sm={2}>
+              <Label for="phone" sm={2}>
                 Department Phone
               </Label>
               <Col sm={10}>
                 <Input
                   type="text"
                   name="DepPhone"
+                  id="DepPhone"
                   value={this.state.DepPhone}
                   onChange={this.onChangeClass}
-                  placeholder="Enter Class"
+                  placeholder="Enter Dept Phone"
                 />
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="Password" sm={2}>
+              <Label for="EmailId" sm={2}>
                 Department EmailId
               </Label>
               <Col sm={10}>
                 <Input
                   type="text"
                   name="DepEmail"
+                  id="DepEmail"
                   value={this.state.DepEmail}
                   onChange={this.onChangeAddress}
-                  placeholder="Enter Address"
+                  placeholder="Enter Email Id"
                 />
               </Col>
             </FormGroup>

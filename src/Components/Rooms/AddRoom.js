@@ -33,8 +33,14 @@ function AddRoom() {
       let room = { ...Room }; // copying the old datas array
 
       const saveRoom = JSON.parse(localStorage.getItem(Save_Room_From));
-      if (saveRoom) {
-        let newId = getMax(saveRoom, "id") + 1;
+      if (saveRoom.length >= 1) {
+        let max;
+        for (let i = 0; i < saveRoom.length; i++) {
+          if (max == null) max = saveRoom.length;
+        }
+        // let newId = getMax(saveDep, "id") + 1;
+        let newId = max + 1;
+        //let newId = getMax(saveRoom, "id") + 1;
         room.id = newId;
         console.log(room.id);
         saveRoom.push(room);

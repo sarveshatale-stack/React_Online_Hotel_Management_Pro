@@ -38,17 +38,14 @@ function AddDepartment(props) {
       let dep = { ...Department }; // copying the old datas array
 
       const saveDep = JSON.parse(localStorage.getItem(Save_Department_From));
-      if (saveDep) {
-        // let max;
-        // for (var i = 0; i < saveDep.length; i++) {
-        //   console.log(saveDep);
-        //   //if (saveDep == null || saveDep[i].id > max["id"])
-        //   max = saveDep[i].count;
-        //   console.log(max);
-        // }
-        let newId = getMax(saveDep, "id") + 1;
+      if (saveDep.length >= 1) {
+        let max;
+        for (let i = 0; i < saveDep.length; i++) {
+          if (max == null) max = saveDep.length;
+        }
+        // let newId = getMax(saveDep, "id") + 1;
+        let newId = max + 1;
         dep.id = newId;
-        console.log(dep.id);
         saveDep.push(dep);
         localStorage.setItem(Save_Department_From, JSON.stringify(saveDep));
       } else {
