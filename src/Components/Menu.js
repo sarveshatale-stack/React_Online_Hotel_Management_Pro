@@ -39,7 +39,7 @@ class Menu extends Component {
         <div>
           <Router>
             <div>
-              <h2>Welcome To Taj Hotel</h2>
+              <h2>Welcome To TajGuru Hotel</h2>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <ul className="navbar mr-auto">
                   <li>
