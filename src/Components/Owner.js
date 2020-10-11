@@ -25,9 +25,9 @@ class Owner extends Component {
               <Link to={"/DepartmentList"} className="nav-link">
                 Department List
               </Link>
-              <Link to={"/ViewReport"} className="nav-link">
+              {/* <Link to={"/ViewReport"} className="nav-link">
                 View Report
-              </Link>
+              </Link> */}
               <Link to={"/Login"} className="nav-link" onClick={this.onLogOut}>
                 Log Out
               </Link>
@@ -36,7 +36,7 @@ class Owner extends Component {
               <Route path="/AddDepartment" component={AddDepartment} />
               <Route path="/DepartmentList" component={DepartmentList} />
               <Route path="/Edit" component={Edit} />
-              <Route path="/ViewReport" component={ViewReport} />
+              {/* <Route path="/ViewReport" component={ViewReport} /> */}
               <Route path="/Login" component={Login} />
             </Switch>
           </div>
