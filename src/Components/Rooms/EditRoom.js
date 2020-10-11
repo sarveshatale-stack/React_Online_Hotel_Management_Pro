@@ -10,9 +10,8 @@ import {
   Button
 } from "reactstrap";
 import axios from "axios";
-import "./css/AddDepartment.css";
 const Save_Room_From = "REACT.AddRoom";
-class Edit extends React.Component {
+class EditRoom extends React.Component {
   constructor(props) {
     super(props);
 
@@ -80,11 +79,11 @@ class Edit extends React.Component {
 
   onUpdate(e) {
     e.preventDefault();
-    const saveDep = JSON.parse(localStorage.getItem(Save_Department_From));
-    if (saveDep) {
+    const saveRoom = JSON.parse(localStorage.getItem(Save_Room_From));
+    if (saveRoom) {
       const query = new URLSearchParams(this.props.location.search);
       const id = query.get("Roomid");
-      const newdata = saveDep.map((data) => {
+      const newdata = saveRoom.map((data) => {
         let Compareid = data.id.toString();
         if (id === Compareid) {
           (data.RoomNumber = this.state.RoomNumber),
@@ -94,7 +93,7 @@ class Edit extends React.Component {
           data.RoomStatus = this.state.RoomStatus;
         }
       });
-      var newDepartmentList = saveDep.filter((emp) => emp.id !== id);
+      var newDepartmentList = saveRoom.filter((emp) => emp.id !== id);
       localStorage.setItem(Save_Room_From, JSON.stringify(newDepartmentList));
     }
 
@@ -104,7 +103,7 @@ class Edit extends React.Component {
 
   render() {
     return (
-      <Container className="App">
+      <Container className="AppContainer">
         <h4 className="PageHeading">Update Room Informations</h4>
         <Form className="form" onSubmit={this.onUpdate}>
           <Col>
@@ -115,7 +114,8 @@ class Edit extends React.Component {
               <Col sm={10}>
                 <Input
                   type="text"
-                  name="DepName"
+                  name="RoomNumber"
+                  id="RoomNumber"
                   value={this.state.RoomNumber}
                   onChange={this.onChangeName}
                   placeholder="Enter Room Number"
@@ -129,6 +129,7 @@ class Edit extends React.Component {
               <Col sm={10}>
                 <select
                   name="RoomType"
+                  id="RoomType"
                   value={this.state.RoomType}
                   onChange={this.onChangeRollNo}
                 >
@@ -147,6 +148,7 @@ class Edit extends React.Component {
                 <Input
                   type="text"
                   name="RoomPhone"
+                  id="RoomPhone"
                   value={this.state.RoomPhone}
                   onChange={this.onChangeClass}
                   placeholder="Enter Phone"
@@ -161,6 +163,7 @@ class Edit extends React.Component {
                 <Input
                   type="text"
                   name="Roomlocation"
+                  id="Roomlocation"
                   value={this.state.RoomLocation}
                   onChange={this.onChangeAddress}
                   placeholder="Enter Location"
@@ -174,6 +177,7 @@ class Edit extends React.Component {
               <Col sm={10}>
                 <select
                   name="RoomStatus"
+                  id="RoomStatus"
                   onChange={this.onChangeStatus}
                   value={this.state.RoomStatus}
                 >
@@ -203,4 +207,4 @@ class Edit extends React.Component {
   }
 }
 
-export default Edit;
+export default EditRoom;

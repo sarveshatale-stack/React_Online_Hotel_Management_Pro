@@ -5,7 +5,7 @@ import "./css/Owner.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddRoom from "./Rooms/AddRoom";
 import RoomList from "./Rooms/RoomList";
-import "./css/AddDepartment.css";
+import EditRoom from "./Rooms/EditRoom";
 class RoomManagement extends Component {
   render() {
     return (
@@ -22,6 +22,7 @@ class RoomManagement extends Component {
             </div>
             <Switch>
               <Route path="/AddRoom" component={AddRoom} />
+              <Route path="/EditRoom" component={EditRoom} />
               <Route path="/RoomList" component={RoomList} />
             </Switch>
           </div>

@@ -26,8 +26,10 @@ function RoomList(props) {
   };
 
   return (
-    <div>
-      <h4 align="center">Room List</h4>
+    <div className="AppContainer">
+      <h4 className="PageHeading" align="center">
+        Room List
+      </h4>
       <table className="table table-striped" style={{ marginTop: 10 }}>
         <thead>
           <tr>
@@ -50,7 +52,7 @@ function RoomList(props) {
                 <td>{item.RoomStatus}</td>
                 <td>
                   <Link
-                    to={"/Edit?Roomid=" + item.id}
+                    to={"/EditRoom?Roomid=" + item.id}
                     className="btn btn-success"
                   >
                     Edit
